@@ -22,7 +22,6 @@ while True:
     index_one = count + 1
     index_two = count + 2
     store_index = count + 3
-    # print(f'action - {action}\tindex_one - {data[index_one]}\tindex_two - {data[index_two]}\tstore_index - {data[store_index]}\n{data}')
     if action != 1 and action != 2:
         break
     data[data[store_index]] = data[data[index_one]] + data[data[index_two]] if action == 1 else data[data[index_one]] * data[data[index_two]]
