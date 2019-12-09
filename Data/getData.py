@@ -26,6 +26,13 @@ def write_data(todays_data):
             file.write(f'{line}\n')
         file.close()
 
+def pull_data(day, year):
+    if check_file() == False:
+        data = get_todays_data(day, year)
+        write_data(data)
+    else:
+        data = read_data()
+
 def main():
     print(get_todays_data(1,2019))
 
