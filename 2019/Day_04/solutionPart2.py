@@ -1,5 +1,6 @@
 import sys
 from os import path
+from collections import Counter
 
 sys.path.insert(1, f"..{path.sep}..{path.sep}Data")
 from getData import *
@@ -11,8 +12,17 @@ def splitIntegerIntoDigits(myNumber):
     return [int(number) for number in str(myNumber)]
 
 def checkForEqualNumbers(myNumber):
-    myList = splitIntegerIntoDigits(myNumber)
-    if myList[0] == myList[1] or myList[1] == myList[2] or myList[2] == myList[3] or myList[3] == myList[4] or myList[4] == myList[5]:
+    # Break number into its individual digits
+    myString = str(myNumber)
+    # Build a list of repeated numbers
+    listOfRepeatedLetters = []
+    # iterate through the numbers pairwise
+    for letterOne, letterTwo in zip(myString, myString[1:]):
+        if letterOne == letterTwo:
+            # if the pair is equal add it to listOfRepeatedLetters
+            listOfRepeatedLetters.append(letterOne)
+    # If '1' is found in the counter, return true; we've found a pair.
+    if 1 in Counter(listOfRepeatedLetters).values():
         return True
     else:
         return False
