@@ -32,6 +32,7 @@ def pull_data(day, year):
         write_data(data)
     else:
         data = read_data()
+    return data
 
 def main():
     print(get_todays_data(1,2019))
