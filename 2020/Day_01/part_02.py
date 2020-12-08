@@ -1,5 +1,5 @@
 import os
-import sys
+import sys         
 
 
 def main():
@@ -18,6 +18,7 @@ def main():
         importData.write_data(data)
     else:
         data = importData.read_data()
+    i 
     for i in range(0, len(data)-2):
         one = int(data[i])
         for j in range(i+1, len(data)-1):
@@ -26,7 +27,7 @@ def main():
                 three = int(data[k])
                 if one + two + three == 2020:
                     product = one * two * three
-                    print(f'The umbers are {one}, {two}, and {three}.')
+                    print(f'The numbers are {one}, {two}, and {three}.')
                     print(f'The product is {product}')
                     exit()
 
