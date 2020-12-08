@@ -22,11 +22,13 @@ def main():
         one = int(data[i])
         for j in range(i+1, len(data)-1):
             two = int(data[j])
-            if one + two == 2020:
-                product = one * two
-                print(f'The numbers are {one} and {two}.')
-                print(f'The product is {product}')
-                exit()
+            for k in range(j+1, len(data)):
+                three = int(data[k])
+                if one + two + three == 2020:
+                    product = one * two * three
+                    print(f'The umbers are {one}, {two}, and {three}.')
+                    print(f'The product is {product}')
+                    exit()
 
 
 if __name__ == "__main__":
