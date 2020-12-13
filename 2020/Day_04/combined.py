@@ -1,5 +1,6 @@
 import os
 import sys
+import re
 
 
 def importData(day, year):
@@ -64,6 +65,60 @@ def part_one(myData):
 
 def part_two(myData):
     print("----Part 02----")
+    if myData[-1] != "":
+        myData.append("")
+    batchFile = ""
+    matchingPassports = 0
+    for i in myData:
+        if i != "":
+            batchFile = batchFile + i + " "
+        else:
+            byr = re.search(r"byr:(\d{4})", batchFile)
+            iyr = re.search(r"iyr:(\d{4})", batchFile)
+            eyr = re.search(r"eyr:(\d{4})", batchFile)
+            hgt = re.search(r"hgt:(\d+)([cmin]+)", batchFile)
+            hcl = re.search(r"hcl:#[0-9a-f]{6}", batchFile)
+            ecl = re.search(r"ecl:([a-z]{3})", batchFile)
+            pid = re.search(r"pid:([0-9]+)", batchFile)
+            if (
+                byr
+                and 1920 <= int(byr.group(1)) <= 2002
+                and iyr
+                and 2010 <= int(iyr.group(1)) <= 2020
+                and eyr
+                and 2020 <= int(eyr.group(1)) <= 2030
+                and checkHeight(hgt)
+                and hcl
+                and checkEyeColor(ecl)
+                and pid
+                and len(pid.group(1)) == 9
+            ):
+                matchingPassports += 1
+            batchFile = ""
+    print('The number of valid passports is '
+          f'- {matchingPassports}')
+
+
+def checkEyeColor(ecl):
+    eyeColorList = ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]
+    if (
+        ecl
+        and ecl.group(1) in eyeColorList
+    ):
+        return True
+    else:
+        return False
+
+
+def checkHeight(hgt):
+    if not hgt:
+        return False
+    elif hgt.group(2) == "cm":
+        return True if 150 <= int(hgt.group(1)) <= 193 else False
+    elif hgt.group(2) == "in":
+        return True if 59 <= int(hgt.group(1)) <= 76 else False
+    else:
+        return False
 
 
 if __name__ == "__main__":
