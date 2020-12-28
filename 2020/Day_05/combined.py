@@ -81,10 +81,10 @@ def part_two(myData):
         seatInfo = calcSeatID(seat)
         IDs.append(seatInfo[2])
     IDs = sorted(IDs)
-    lower = IDs[0]
-    while lower + 1 in IDs:
-        lower += 1
-    print(f'Your Seat ID is - {lower + 1}')
+    for element in range(IDs[0], IDs[-1] + 1):
+        if element not in IDs:
+            print(f'Your Seat ID is - {element}')
+            break
 
 
 if __name__ == "__main__":
